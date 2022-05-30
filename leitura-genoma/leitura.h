@@ -1,1 +1,0 @@
-void contagem_leituras(FILE *arquivo_genoma, FILE *arquivo_pos_genes, FILE *arquivos_fragmentos, FILE *arquivos_pos_fragmentos, int n_genes, int n_fragmentos, FILE *atividade_genica_txt);

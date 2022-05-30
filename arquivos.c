@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include "ordenacao.h"
 
 // Lê uma linha do arquivo fornecido
 char *ler_linha(FILE *arquivo, char delimitador)
@@ -12,7 +14,7 @@ char *ler_linha(FILE *arquivo, char delimitador)
     {
         linha = (char *)realloc(linha, ++qtd_letras * sizeof(char));
         linha[qtd_letras - 1] = letra;
-        letra = getchar();
+        letra = fgetc(arquivo);
     }
 
     linha = (char *)realloc(linha, (qtd_letras + 1) * sizeof(char));
@@ -22,17 +24,28 @@ char *ler_linha(FILE *arquivo, char delimitador)
 }
 
 // Conta o número de intersecções entre intervalos de dois arquivos
-void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, int nA, int nB, FILE *arquivo_contagens)
+void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, FILE *arquivo_contagens)
 {
-    int A[nA][2], B[nB][2], contagens[nA];
+    // long A[nA][2], B[nB][2], contagens[nA];
     char *linha = NULL;
 
+    long **A = malloc(sizeof(long*)* nA);
+    long **B = malloc(sizeof(long*)* nB);
+    long *contagens = malloc(sizeof(long)* nA);
+
+    for (long i = 0; i < nA; i++) 
+      A[i] = malloc(sizeof(long)*2);
+    
+    for (long i = 0; i < nB; i++) 
+      B[i] = malloc(sizeof(long)*2);
+    
+
     // Todo: Implementar com Calloc
-    for (int i = 0; i < nA; i++)
+    for (long i = 0; i < nA; i++)
         contagens[i] = 0;
 
     // Lê Intervalos de A
-    for (int i = 0; i < nA; i++)
+    for (long i = 0; i < nA; i++)
     {
         linha = ler_linha(arquivo_A, '\n');
         A[i][0] = linha[0];
@@ -40,7 +53,7 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, int nA, int nB, FIL
     }
 
     // Lê Intervalos de B
-    for (int i = 0; i < nB; i++)
+    for (long i = 0; i < nB; i++)
     {
         linha = ler_linha(arquivo_B, '\n');
         B[i][0] = linha[0];
@@ -53,10 +66,10 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, int nA, int nB, FIL
     // Ordenando Intervalos de B
     ordena_numeros(B, nB);
 
-    int primeiro_iB = 0;
-    for (int iA = 0; iA < nA; iA++)
+    long primeiro_iB = 0;
+    for (long iA = 0; iA < nA; iA++)
     {
-        for (int iB = primeiro_iB; iB < nB; iB++)
+        for (long iB = primeiro_iB; iB < nB; iB++)
         {
             // Verificando se não houve intersecção entre os intervalos
             if (A[iA][1] < B[iB][0] || A[iA][0] > B[iB][1])
@@ -71,7 +84,7 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, int nA, int nB, FIL
     }
 
     // Inserindo Contagens encontradas no Arquivo txt
-    for (int i = 0; i < nA; i++)
+    for (long i = 0; i < nA; i++)
         fprintf(arquivo_contagens, "%d\n", contagens[i]);
 }
 
@@ -81,7 +94,7 @@ void ctrl_f(FILE *arquivo_texto, FILE *arquivo_trechos, FILE *arquivo_saida)
     // Lendo arquivo texto
     char *texto = ler_linha(arquivo_texto, EOF);
     char *trecho;
-    int i, j;
+    long i, j;
 
     while ((trecho = ler_linha(arquivo_trechos, '\n')) != NULL)
     {

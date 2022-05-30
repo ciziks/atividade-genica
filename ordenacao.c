@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int ordena_digitos(int **A, int n, int posicao)
+long ordena_digitos(long **A, long n, long posicao)
 {
-    int B[10], i, digito;
+    long B[10], i, digito;
     for (i = 0; i < 10; i++)
         B[i] = 0;
     // calloc
@@ -18,7 +18,7 @@ int ordena_digitos(int **A, int n, int posicao)
     for (i = 1; i < 10; i++)
         B[i] = B[i] + B[i - 1];
 
-    int C[n][2];
+    long C[n][2];
 
     for (i = n - 1; i >= 0; i--)
     {
@@ -37,15 +37,15 @@ int ordena_digitos(int **A, int n, int posicao)
 }
 
 
-// TODO: Análise Teórica da Complexidade Assintótica (2)
+// TODO: Análise Teórica da Complexidade Assinótica (2)
 // TODO: Estimar pior, melhor e médio casos (2)
 // TODO: Explicação da Ordenação (4)
 // TODO: Análise Empírica da ordenação (5)
-int ordena_numeros(int **A, int n)
+int ordena_numeros(long **A, long n)
 {
-    int maior = A[0][0], posicao = 1;
+    long maior = A[0][0], posicao = 1;
 
-    for (int i = 0; i < n; i++)
+    for (long i = 0; i < n; i++)
     {
         if (A[i][0] > maior)
             maior = A[i][0];
