@@ -48,10 +48,10 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, int nA, int nB, FIL
     }
 
     // Ordenando Intervalos de A
-    OrdenaNumeros(A, nA);
+    ordena_numeros(A, nA);
 
     // Ordenando Intervalos de B
-    OrdenaNumeros(B, nB);
+    ordena_numeros(B, nB);
 
     int primeiro_iB = 0;
     for (int iA = 0; iA < nA; iA++)

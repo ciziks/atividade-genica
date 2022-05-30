@@ -36,6 +36,11 @@ int ordena_digitos(int **A, int n, int posicao)
     }
 }
 
+
+// TODO: Análise Teórica da Complexidade Assintótica (2)
+// TODO: Estimar pior, melhor e médio casos (2)
+// TODO: Explicação da Ordenação (4)
+// TODO: Análise Empírica da ordenação (5)
 int ordena_numeros(int **A, int n)
 {
     int maior = A[0][0], posicao = 1;
@@ -48,7 +53,7 @@ int ordena_numeros(int **A, int n)
 
     while (maior / posicao > 0)
     {
-        OrdenaDigitos(A, n, posicao);
+        ordena_digitos(A, n, posicao);
         posicao = posicao * 10;
     }
 }
