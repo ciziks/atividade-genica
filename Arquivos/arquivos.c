@@ -17,9 +17,11 @@ char *ler_linha(FILE *arquivo, char delimitador)
         letra = fgetc(arquivo);
     }
 
-    linha = (char *)realloc(linha, (qtd_letras + 1) * sizeof(char));
-    linha[qtd_letras] = EOF;
+    if (linha != NULL) {
+      linha = (char *)realloc(linha, (qtd_letras + 1) * sizeof(char));
+      linha[qtd_letras] = EOF;
 
+    }
     return linha;
 }
 
@@ -33,12 +35,12 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, F
     long **B = malloc(sizeof(long*)* nB);
     long *contagens = malloc(sizeof(long)* nA);
 
-    for (long i = 0; i < nA; i++) 
+    for (long i = 0; i < nA; i++)
       A[i] = malloc(sizeof(long)*2);
-    
-    for (long i = 0; i < nB; i++) 
+
+    for (long i = 0; i < nB; i++)
       B[i] = malloc(sizeof(long)*2);
-    
+
 
     // Todo: Implementar com Calloc
     for (long i = 0; i < nA; i++)
@@ -48,16 +50,20 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, F
     for (long i = 0; i < nA; i++)
     {
         linha = ler_linha(arquivo_A, '\n');
-        A[i][0] = linha[0];
-        A[i][1] = linha[strlen(linha) - 1];
+        if (linha != NULL) {
+          A[i][0] = linha[0];
+          A[i][1] = linha[strlen(linha) - 1];
+        }
     }
 
     // Lê Intervalos de B
     for (long i = 0; i < nB; i++)
     {
         linha = ler_linha(arquivo_B, '\n');
-        B[i][0] = linha[0];
-        B[i][1] = linha[strlen(linha) - 1];
+        if (linha != NULL) {
+          B[i][0] = linha[0];
+          B[i][1] = linha[strlen(linha) - 1];
+        }
     }
 
     // Ordenando Intervalos de A
@@ -88,7 +94,7 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, F
         fprintf(arquivo_contagens, "%ld\n", contagens[i]);
 }
 
-// Encontra a posição de início e fim (intervalo) da primeira ocorrência de um trecho no texto 
+// Encontra a posição de início e fim (intervalo) da primeira ocorrência de um trecho no texto
 void ctrl_f(FILE *arquivo_texto, FILE *arquivo_trechos, FILE *arquivo_saida)
 {
     // Lendo arquivo texto

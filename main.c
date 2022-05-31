@@ -12,10 +12,9 @@ int main(void)
     FILE *atividade_genica = fopen("./Saida/atividade_genica.txt", "w+");
     FILE *pos_fragmentos = fopen("./Saida/pos_fragmentos.txt", "w+");
     FILE *genoma_grande = fopen("./Entrada/genoma_grande.txt", "r");
-    FILE *pos_genes_grande = fopen("./Entrada/pos_genes_grande.txt", "r");
+    FILE *pos_genes_grande = fopen("./Entrada/pos_genes_grande.csv", "r");
     FILE *fragmentos_pequeno = fopen("./Entrada/fragmentos_pequeno.txt", "r");
 
-    printf("^");
     contagem_leituras(genoma_grande, pos_genes_grande, fragmentos_pequeno, pos_fragmentos, 10, 300, atividade_genica);
     return 0;
 }
@@ -25,7 +24,7 @@ int main(void)
 //     // FILE *fileptr;
 //     int count_lines = 0;
 //     char filechar[40], chr;
- 
+
 //     // printf("Enter file name: ");
 //     // scanf("%s", filechar);
 //     // fileptr = fopen(filechar, "r");
@@ -45,4 +44,3 @@ int main(void)
 //     // printf("There are %d lines in %s  in a file\n", count_lines, filechar);
 //     return count_lines;
 // }
-
