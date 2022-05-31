@@ -9,13 +9,22 @@
 //genoma grande.txt, pos genes grande.csv, fragmentos pequeno.txt)
 int main(void)
 {
-    FILE *atividade_genica = fopen("./Saida/atividade_genica.txt", "w+");
-    FILE *pos_fragmentos = fopen("./Saida/pos_fragmentos.txt", "w+");
-    FILE *genoma_grande = fopen("./Entrada/genoma_grande.txt", "r");
-    FILE *pos_genes_grande = fopen("./Entrada/pos_genes_grande.csv", "r");
-    FILE *fragmentos_pequeno = fopen("./Entrada/fragmentos_pequeno.txt", "r");
+    FILE *atividade_genica = fopen("./Saida/atividade_genica.txt", "w");
+    FILE *pos_fragmentos = fopen("./Saida/pos_fragmentos.csv", "w+");
+    FILE *genoma = fopen("./Entrada/genoma_teste.txt", "r");
+    FILE *pos_genes = fopen("./Entrada/pos_genes_teste.csv", "r");
+    FILE *fragmentos = fopen("./Entrada/fragmentos_teste.txt", "r");
 
-    contagem_leituras(genoma_grande, pos_genes_grande, fragmentos_pequeno, pos_fragmentos, 10, 300, atividade_genica);
+
+    contagem_leituras(genoma, pos_genes, fragmentos, pos_fragmentos, 2, 2, atividade_genica);
+
+
+
+    fclose(atividade_genica);
+    fclose(pos_fragmentos);
+    fclose(genoma);
+    fclose(pos_genes);
+    fclose(fragmentos);
     return 0;
 }
 

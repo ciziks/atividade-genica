@@ -16,12 +16,11 @@ char *ler_linha(FILE *arquivo, char delimitador)
         linha[qtd_letras - 1] = letra;
         letra = fgetc(arquivo);
     }
-
     if (linha != NULL) {
       linha = (char *)realloc(linha, (qtd_letras + 1) * sizeof(char));
-      linha[qtd_letras] = EOF;
-
+      linha[qtd_letras] = '\0';
     }
+
     return linha;
 }
 
@@ -41,29 +40,22 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, F
     for (long i = 0; i < nB; i++)
       B[i] = malloc(sizeof(long)*2);
 
-
-    // Todo: Implementar com Calloc
     for (long i = 0; i < nA; i++)
         contagens[i] = 0;
 
     // Lê Intervalos de A
     for (long i = 0; i < nA; i++)
     {
-        linha = ler_linha(arquivo_A, '\n');
-        if (linha != NULL) {
-          A[i][0] = linha[0];
-          A[i][1] = linha[strlen(linha) - 1];
-        }
+      A[i][0] = atol(ler_linha(arquivo_A, ','));
+      A[i][1] = atol(ler_linha(arquivo_A, '\n'));
     }
 
-    // Lê Intervalos de B
+    fseek(arquivo_B,0,SEEK_SET);
+
     for (long i = 0; i < nB; i++)
     {
-        linha = ler_linha(arquivo_B, '\n');
-        if (linha != NULL) {
-          B[i][0] = linha[0];
-          B[i][1] = linha[strlen(linha) - 1];
-        }
+      B[i][0] = atol(ler_linha(arquivo_B, ','));
+      B[i][1] = atol(ler_linha(arquivo_B, '\n'));
     }
 
     // Ordenando Intervalos de A
@@ -71,6 +63,9 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, F
 
     // Ordenando Intervalos de B
     ordena_numeros(B, nB);
+    // for (long k = 0; k < nA; k++) {
+    //   printf("%ld\n",A[k][0]);
+    // }
 
     long primeiro_iB = 0;
     for (long iA = 0; iA < nA; iA++)
@@ -98,23 +93,23 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, F
 void ctrl_f(FILE *arquivo_texto, FILE *arquivo_trechos, FILE *arquivo_saida)
 {
     // Lendo arquivo texto
-    char *texto = ler_linha(arquivo_texto, EOF);
+    char *texto = ler_linha(arquivo_texto, '\0');
     char *trecho;
     long i, j;
 
     while ((trecho = ler_linha(arquivo_trechos, '\n')) != NULL)
     {
         i = 0;
-        while (texto[i] != EOF)
+        while (texto[i] != '\0')
         {
             j = 0;
 
-            while (trecho[j] != EOF && texto[i + j] == trecho[j])
+            while (trecho[j] != '\0' && texto[i + j] == trecho[j])
                 j++;
 
-            if (trecho[j] == EOF)
+            if (trecho[j] == '\0')
             {
-                fprintf(arquivo_saida, "%ld, %ld\n", i, i + j - 1);
+                fprintf(arquivo_saida, "%ld,%ld\n", i, i + j - 1);
                 break;
             }
 
