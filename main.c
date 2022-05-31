@@ -1,22 +1,22 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "arquivos.h"
 #include "leitura.h"
-#include "ordenacao.h"
 
 // TODO: Redigir Relatório (1)
 // TODO: Críticas e Propostas de Melhorias (12)
 // TODO: Descrição da experiência do Projeto (13)
+
+//genoma grande.txt, pos genes grande.csv, fragmentos pequeno.txt)
 int main(void)
 {
-    FILE *atividade_genica = fopen("atividade_genica.txt", "w+");
-    FILE *pos_fragmentos = fopen("pos_fragmentos.txt", "w+");
-    FILE *genoma_grande = fopen("genoma_grande.txt", "r");
-    FILE *pos_genes_grande = fopen("pos_genes_grande.txt", "r");
-    FILE *fragmentos_pequeno = fopen("fragmentos_pequeno.txt", "r");
+    FILE *atividade_genica = fopen("./Saida/atividade_genica.txt", "w+");
+    FILE *pos_fragmentos = fopen("./Saida/pos_fragmentos.txt", "w+");
+    FILE *genoma_grande = fopen("./Entrada/genoma_grande.txt", "r");
+    FILE *pos_genes_grande = fopen("./Entrada/pos_genes_grande.txt", "r");
+    FILE *fragmentos_pequeno = fopen("./Entrada/fragmentos_pequeno.txt", "r");
 
-
-    contagem_leituras(genoma_grande, pos_genes_grande, fragmentos_pequeno, pos_fragmentos, 1000000, 300, atividade_genica);
+    printf("^");
+    contagem_leituras(genoma_grande, pos_genes_grande, fragmentos_pequeno, pos_fragmentos, 10, 300, atividade_genica);
     return 0;
 }
 
@@ -46,4 +46,3 @@ int main(void)
 //     return count_lines;
 // }
 
-//genoma grande.txt, pos genes grande.csv, fragmentos pequeno.txt)

@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include "ordenacao.h"
 
 long ordena_digitos(long **A, long n, long posicao)
 {
@@ -41,7 +42,7 @@ long ordena_digitos(long **A, long n, long posicao)
 // TODO: Estimar pior, melhor e médio casos (2)
 // TODO: Explicação da Ordenação (4)
 // TODO: Análise Empírica da ordenação (5)
-int ordena_numeros(long **A, long n)
+long ordena_numeros(long **A, long n)
 {
     long maior = A[0][0], posicao = 1;
 

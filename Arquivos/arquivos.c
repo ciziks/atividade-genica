@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "ordenacao.h"
+#include "arquivos.h"
 
 // Lê uma linha do arquivo fornecido
 char *ler_linha(FILE *arquivo, char delimitador)
@@ -85,7 +85,7 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, F
 
     // Inserindo Contagens encontradas no Arquivo txt
     for (long i = 0; i < nA; i++)
-        fprintf(arquivo_contagens, "%d\n", contagens[i]);
+        fprintf(arquivo_contagens, "%ld\n", contagens[i]);
 }
 
 // Encontra a posição de início e fim (intervalo) da primeira ocorrência de um trecho no texto 
@@ -108,7 +108,7 @@ void ctrl_f(FILE *arquivo_texto, FILE *arquivo_trechos, FILE *arquivo_saida)
 
             if (trecho[j] == EOF)
             {
-                fprintf(arquivo_saida, "%d, %d", i, i + j - 1);
+                fprintf(arquivo_saida, "%ld, %ld\n", i, i + j - 1);
                 break;
             }
 
