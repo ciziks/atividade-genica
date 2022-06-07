@@ -4,10 +4,9 @@
 
 long ordena_digitos(long **A, long n, long posicao)
 {
-    long B[10], i, digito;
-    for (i = 0; i < 10; i++)
-        B[i] = 0;
-    // calloc
+    long i, digito;
+    long *B = (long *)calloc(10, sizeof(long));
+
 
     for (i = 0; i < n; i++)
     {
@@ -19,7 +18,11 @@ long ordena_digitos(long **A, long n, long posicao)
     for (i = 1; i < 10; i++)
         B[i] = B[i] + B[i - 1];
 
-    long C[n][2];
+    long **C = (long **)malloc(n*sizeof(long*));
+    for(i = 0; i < n; i++)
+    {
+        C[i] = (long *)malloc(2*sizeof(long));
+    }
 
     for (i = n - 1; i >= 0; i--)
     {
@@ -35,6 +38,13 @@ long ordena_digitos(long **A, long n, long posicao)
         A[i][0] = C[i][0];
         A[i][1] = C[i][1];
     }
+
+    for(i = 0; i < n; i++)
+        free(C[i]);
+
+    free(C);
+    free(B);
+    
 }
 
 

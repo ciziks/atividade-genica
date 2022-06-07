@@ -16,40 +16,13 @@ int main(void)
     FILE *fragmentos = fopen("./Entrada/fragmentos_teste.txt", "r");
 
 
-    contagem_leituras(genoma, pos_genes, fragmentos, pos_fragmentos, 2, 2, atividade_genica);
-
-
+    contagem_leituras(genoma, pos_genes, fragmentos, pos_fragmentos, 2, 1, atividade_genica);
 
     fclose(atividade_genica);
     fclose(pos_fragmentos);
     fclose(genoma);
     fclose(pos_genes);
     fclose(fragmentos);
+
     return 0;
 }
-
-// int contar_linhas(FILE *arquivo)
-// {
-//     // FILE *fileptr;
-//     int count_lines = 0;
-//     char filechar[40], chr;
-
-//     // printf("Enter file name: ");
-//     // scanf("%s", filechar);
-//     // fileptr = fopen(filechar, "r");
-//    //extract character from file and store in chr
-//     chr = fgetc(arquivo);
-//     while (chr != EOF)
-//     {
-//         //Count whenever new line is encountered
-//         if (chr == 'n')
-//         {
-//             count_lines = count_lines + 1;
-//         }
-//         //take next character from file.
-//         chr = fgetc(arquivo);
-//     }
-//     // fclose(arquivo); //close file.
-//     // printf("There are %d lines in %s  in a file\n", count_lines, filechar);
-//     return count_lines;
-// }

@@ -1,4 +1,4 @@
-#include "ordenacao.h"
+// #include "ordenacao.h"
 
 char *ler_linha(FILE *arquivo, char delimitador);
 

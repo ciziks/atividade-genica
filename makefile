@@ -14,7 +14,7 @@ Main:
 	gcc -g -I ./Arquivos -I ./Ordenacao -I ./Leitura -c main.c -o main.o
 
 run:
-	./all
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes  ./all
 
 clean:
 	rm *.o all

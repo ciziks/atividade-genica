@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "arquivos.h"
+#include "ordenacao.h"
 
 // Lê uma linha do arquivo fornecido
 char *ler_linha(FILE *arquivo, char delimitador)
@@ -27,18 +28,15 @@ char *ler_linha(FILE *arquivo, char delimitador)
 // Conta o número de intersecções entre intervalos de dois arquivos
 void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, FILE *arquivo_contagens)
 {
-    // long A[nA][2], B[nB][2], contagens[nA];
-    char *linha = NULL;
-
-    long **A = malloc(sizeof(long*)* nA);
-    long **B = malloc(sizeof(long*)* nB);
-    long *contagens = malloc(sizeof(long)* nA);
+    long **A = (long **)malloc(sizeof(long *)* nA);
+    long **B = (long **)malloc(sizeof(long *)* nB);
+    long *contagens = (long*)malloc(sizeof(long)* nA);
 
     for (long i = 0; i < nA; i++)
-      A[i] = malloc(sizeof(long)*2);
+        A[i] = (long *)malloc(sizeof(long)*2);
 
     for (long i = 0; i < nB; i++)
-      B[i] = malloc(sizeof(long)*2);
+        B[i] = (long *)malloc(sizeof(long)*2);
 
     for (long i = 0; i < nA; i++)
         contagens[i] = 0;
@@ -46,16 +44,16 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, F
     // Lê Intervalos de A
     for (long i = 0; i < nA; i++)
     {
-      A[i][0] = atol(ler_linha(arquivo_A, ','));
-      A[i][1] = atol(ler_linha(arquivo_A, '\n'));
+        A[i][0] = atol(ler_linha(arquivo_A, ','));
+        A[i][1] = atol(ler_linha(arquivo_A, '\n'));
     }
 
     fseek(arquivo_B,0,SEEK_SET);
 
     for (long i = 0; i < nB; i++)
     {
-      B[i][0] = atol(ler_linha(arquivo_B, ','));
-      B[i][1] = atol(ler_linha(arquivo_B, '\n'));
+        B[i][0] = atol(ler_linha(arquivo_B, ','));
+        B[i][1] = atol(ler_linha(arquivo_B, '\n'));
     }
 
     // Ordenando Intervalos de A
@@ -63,9 +61,6 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, F
 
     // Ordenando Intervalos de B
     ordena_numeros(B, nB);
-    // for (long k = 0; k < nA; k++) {
-    //   printf("%ld\n",A[k][0]);
-    // }
 
     long primeiro_iB = 0;
     for (long iA = 0; iA < nA; iA++)
@@ -87,6 +82,19 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, F
     // Inserindo Contagens encontradas no Arquivo txt
     for (long i = 0; i < nA; i++)
         fprintf(arquivo_contagens, "%ld\n", contagens[i]);
+
+    for (long i = 0; i < nA; i++)
+    {
+        free(A[i]);
+    }
+    for (long i = 0; i < nB; i++)
+    {   
+        free(B[i]);
+    }
+
+    free(A);
+    free(B);
+    free(contagens);
 }
 
 // Encontra a posição de início e fim (intervalo) da primeira ocorrência de um trecho no texto
@@ -115,5 +123,7 @@ void ctrl_f(FILE *arquivo_texto, FILE *arquivo_trechos, FILE *arquivo_saida)
 
             i++;
         }
+        free(trecho);
     }
+    free(texto);
 }
