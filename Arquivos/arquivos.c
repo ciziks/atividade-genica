@@ -42,18 +42,27 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, F
         contagens[i] = 0;
 
     // Lê Intervalos de A
+    char* aux;
     for (long i = 0; i < nA; i++)
     {
-        A[i][0] = atol(ler_linha(arquivo_A, ','));
-        A[i][1] = atol(ler_linha(arquivo_A, '\n'));
+        aux = ler_linha(arquivo_A, ',');
+        A[i][0] = atol(aux);
+        free(aux);
+        aux = ler_linha(arquivo_A, '\n');
+        A[i][1] = atol(aux);
+        free(aux);
     }
 
     fseek(arquivo_B,0,SEEK_SET);
 
     for (long i = 0; i < nB; i++)
     {
-        B[i][0] = atol(ler_linha(arquivo_B, ','));
-        B[i][1] = atol(ler_linha(arquivo_B, '\n'));
+        aux = ler_linha(arquivo_B, ',');
+        B[i][0] = atol(aux);
+        free(aux);
+        aux = ler_linha(arquivo_B, '\n');
+        B[i][1] = atol(aux);
+        free(aux);
     }
 
     // Ordenando Intervalos de A
@@ -89,6 +98,7 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, F
     }
     for (long i = 0; i < nB; i++)
     {   
+        
         free(B[i]);
     }
 
