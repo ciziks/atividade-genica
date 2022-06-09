@@ -21,14 +21,11 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, F
 
     for (long i = 0; i < nA; i++)
         contagens[i] = 0;
-
+   
     // Lê Intervalos de A
     char *aux1, *aux2;
     for (long i = 0; i < nA; i++)
     {
-        if(i == 3929){
-            printf("Hello");
-        }
         aux1 = ler_linha(arquivo_A, ',');
         A[i][0] = atol(aux1);
         free(aux1);

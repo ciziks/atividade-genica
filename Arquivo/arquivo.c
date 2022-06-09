@@ -18,7 +18,7 @@ char *ler_linha(FILE *arquivo, char delimitador)
         linha[qtd_letras - 1] = letra;
         letra = fgetc(arquivo);
     }
-    if (linha != NULL)
+    if (linha != NULL || letra == '\n')
     {
         linha = (char *)realloc(linha, (qtd_letras + 1) * sizeof(char));
         linha[qtd_letras] = '\0';
@@ -26,7 +26,6 @@ char *ler_linha(FILE *arquivo, char delimitador)
 
     return linha;
 }
-
 
 // Encontra a posição de início e fim (intervalo) da primeira ocorrência de um trecho no texto
 void ctrl_f(FILE *arquivo_texto, FILE *arquivo_trechos, FILE *arquivo_saida)
