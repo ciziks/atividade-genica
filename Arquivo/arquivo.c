@@ -5,7 +5,7 @@
 #include "arquivo.h"
 #include "ordenacao.h"
 
-// Lê uma linha do arquivo fornecido
+// Lê uma linha do arquivo fornecido, encerrando no delimitar passado como parametro, como "," ou "\n"
 char *ler_linha(FILE *arquivo, char delimitador)
 {
     int qtd_letras = 0;

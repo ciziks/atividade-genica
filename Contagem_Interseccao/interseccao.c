@@ -23,27 +23,35 @@ void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, F
         contagens[i] = 0;
    
     // Lê Intervalos de A
-    char *aux1, *aux2;
+    char *aux;
     for (long i = 0; i < nA; i++)
     {
-        aux1 = ler_linha(arquivo_A, ',');
-        A[i][0] = atol(aux1);
-        free(aux1);
-        aux2 = ler_linha(arquivo_A, '\n');
-        A[i][1] = atol(aux2);
-        free(aux2);
+        aux = ler_linha(arquivo_A, ',');
+        A[i][0] = atol(aux);
+        free(aux);
+        aux = ler_linha(arquivo_A, '\n');
+        A[i][1] = atol(aux);
+        free(aux);
     }
 
+    //Redireciona o ponteiro interno do arquivo para o inicio novamente
     fseek(arquivo_B, 0, SEEK_SET);
 
+    // Lê Intervalos de B
     for (long i = 0; i < nB; i++)
     {
-        aux1 = ler_linha(arquivo_B, ',');
-        B[i][0] = atol(aux1);
-        free(aux1);
-        aux2 = ler_linha(arquivo_B, '\n');
-        B[i][1] = atol(aux2);
-        free(aux2);
+        //Caso a quantidade de pos-fragmentos encontrados forem menores que os fragmentos esperados repassa o tamanho do vetor nB
+        aux = ler_linha(arquivo_B, ',');
+        if(aux == NULL)
+        {
+            nB = i;
+            break;
+        }
+        B[i][0] = atol(aux);
+        free(aux);
+        aux = ler_linha(arquivo_B, '\n');
+        B[i][1] = atol(aux);
+        free(aux);
     }
 
     // Ordenando Intervalos de A
