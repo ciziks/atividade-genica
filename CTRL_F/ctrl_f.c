@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "arquivo.h"
+#include "ctrl_f.h"
 #include "ordenacao.h"
 
 // Lê uma linha do arquivo fornecido, encerrando no delimitar passado como parametro, como "," ou "\n"
@@ -34,6 +34,7 @@ void ctrl_f(FILE *arquivo_texto, FILE *arquivo_trechos, FILE *arquivo_saida)
     char *texto = ler_linha(arquivo_texto, '\0');
     char *trecho;
     long i, j;
+    int frag_encontrado = 0;
 
     while ((trecho = ler_linha(arquivo_trechos, '\n')) != NULL)
     {
@@ -48,12 +49,18 @@ void ctrl_f(FILE *arquivo_texto, FILE *arquivo_trechos, FILE *arquivo_saida)
             if (trecho[j] == '\0')
             {
                 fprintf(arquivo_saida, "%ld,%ld\n", i, i + j - 1);
+                frag_encontrado = 1;
                 break;
             }
 
             i++;
         }
         free(trecho);
+
+        if (!frag_encontrado)
+            fprintf(arquivo_saida, "%d,%d\n", 0, -1);
+        frag_encontrado = 0;
     }
     free(texto);
+    fseek(arquivo_saida, 0, SEEK_SET);
 }

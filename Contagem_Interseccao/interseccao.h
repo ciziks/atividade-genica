@@ -1,1 +1,0 @@
-void contagem_interseccoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, FILE *arquivo_contagens);
