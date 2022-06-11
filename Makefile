@@ -16,11 +16,14 @@ leitura.o:
 Main:
 	gcc -g -I ./CTRL_F -I ./Ordenacao -I ./Contagem_Leitura -I ./Contagem_Intersecao -c main.c -o main.o
 
-run:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes  ./exec
-
 clean:
 	rm *.o exec
 
-execute: clean exec
+test: clean exec
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes  ./exec
+
+run: clean exec
+	./exec
+
+debug: clean exec
 	echo "r"|gdb exec
