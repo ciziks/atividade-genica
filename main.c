@@ -1,15 +1,28 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "leitura.h"
+#include <string.h>
 
 // TODO: Críticas e Propostas de Melhorias (12)
 // TODO: Descrição da experiência do Projeto (13)
 
-int main(void)
+int main(int argc, char const *argv[])
 {
-    FILE *genoma = fopen("./Entrada/genoma_pequeno.txt", "r");
-    FILE *pos_genes = fopen("./Entrada/pos_genes_pequeno.csv", "r");
-    FILE *fragmentos = fopen("./Entrada/fragmentos_pequeno.txt", "r");
+    if (argc < 4) {
+      printf("Uso: ./exec <arquivo_genoma> <arquivo_posicao_genes> <arquivo_fragmentos>\n\n");
+      printf("Exemplo: ./exec genoma_pequeno.txt pos_genes_pequeno.csv fragmentos_pequeno.txt\n");
+      return 0;
+    }
+    char str[100];
+    strcpy(str,"./Entrada/");
+    strcat(str, argv[1]);
+    FILE *genoma = fopen(str, "r");
+    strcpy(str,"./Entrada/");
+    strcat(str, argv[2]);
+    FILE *pos_genes = fopen(str, "r");
+    strcpy(str,"./Entrada/");
+    strcat(str, argv[3]);
+    FILE *fragmentos = fopen(str, "r");
 
     FILE *atividade_genica = fopen("./Saida/atividade_genica.txt", "w");
     FILE *pos_fragmentos = fopen("./Saida/pos_fragmentos.csv", "w+");
