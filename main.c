@@ -3,8 +3,7 @@
 #include "leitura.h"
 #include <string.h>
 
-// TODO: Críticas e Propostas de Melhorias (12)
-// TODO: Descrição da experiência do Projeto (13)
+int contar_linhas(FILE * fp);
 
 int main(int argc, char const *argv[])
 {
@@ -27,7 +26,7 @@ int main(int argc, char const *argv[])
     FILE *atividade_genica = fopen("./Saida/atividade_genica.txt", "w");
     FILE *pos_fragmentos = fopen("./Saida/pos_fragmentos.csv", "w+");
 
-    contagem_leituras(genoma, pos_genes, fragmentos, pos_fragmentos, 100, 300, atividade_genica);
+    contagem_leituras(genoma, pos_genes, fragmentos, pos_fragmentos, contar_linhas(pos_genes), contar_linhas(fragmentos), atividade_genica);
 
     fclose(atividade_genica);
     fclose(pos_fragmentos);
@@ -36,4 +35,17 @@ int main(int argc, char const *argv[])
     fclose(fragmentos);
 
     return 0;
+}
+
+int contar_linhas(FILE * fp){
+  int linhas = 0;
+  char ch;
+  while(!feof(fp)){
+    ch = fgetc(fp);
+    if(ch == '\n'){
+      linhas++;
+    }
+  }
+  fseek(fp, 0, SEEK_SET);
+  return linhas;
 }
