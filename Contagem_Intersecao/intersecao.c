@@ -29,7 +29,7 @@ void contagem_intersecoes(FILE *arquivo_A, FILE *arquivo_B, long nA, long nB, FI
     {
         extremo = ler_linha(arquivo_A, ',');
         A[i][0] = atol(extremo);
-        // free(extremo);
+        free(extremo);
 
         extremo = ler_linha(arquivo_A, '\n');
         A[i][1] = atol(extremo);
