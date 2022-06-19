@@ -23,7 +23,7 @@ test: clean exec
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./exec genoma_pequeno.txt pos_genes_pequeno.csv fragmentos_pequeno.txt
 
 run: clean exec
-	./exec genoma_pequeno.txt pos_genes_pequeno.csv fragmentos_pequeno.txt
+	./exec genoma_grande.txt pos_genes_grande.csv fragmentos_pequeno.txt
 
 debug: clean exec
 	echo "r"|gdb exec
