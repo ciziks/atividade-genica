@@ -20,7 +20,7 @@ clean:
 	rm *.o exec
 
 test: clean exec
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes  ./exec
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./exec genoma_pequeno.txt pos_genes_pequeno.csv fragmentos_pequeno.txt
 
 run: clean exec
 	./exec genoma_pequeno.txt pos_genes_pequeno.csv fragmentos_pequeno.txt
